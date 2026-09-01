@@ -1,1026 +1,1658 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<script>
-  // Runs before first paint to avoid a flash of the wrong theme.
-  (function() {
-    try {
-      var saved = localStorage.getItem('kartik-portfolio-theme');
-      var wantsLight = saved ? saved === 'light' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
-      if (wantsLight) document.documentElement.setAttribute('data-theme', 'light');
-    } catch (e) {}
-  })();
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kartik Singla | Senior Frontend Engineer</title>
-<meta name="description" content="Kartik Singla, Senior Frontend Engineer specializing in micro-frontend architecture and design systems." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0A0D13;
-    --bg-elev: #12161F;
-    --bg-elev-2: #171C27;
-    --text: #F3F4F7;
-    --text-dim: #9CA2B0;
-    --text-faint: #5B6270;
-    --cyan: #52E8D6;
-    --violet: #A78BFA;
-    --amber: #FFB454;
-    --cyan-rgb: 82,232,214;
-    --violet-rgb: 167,139,250;
-    --amber-rgb: 255,180,84;
-    --fg-rgb: 255,255,255;
-    --line: rgba(255,255,255,0.09);
-    --line-strong: rgba(255,255,255,0.16);
-    --card-grad-1: #151A24;
-    --card-grad-2: #10141C;
-    --mockup-grad-1: #171C27;
-    --mockup-grad-2: #10141C;
-    --nav-bg: rgba(18,22,31,0.7);
-    --cta-grad-1: #52E8D6;
-    --cta-grad-2: #A78BFA;
-    --cta-glow-rgb: 82,232,214;
-    --cta-fg-rgb: 255,255,255;
-    --radius: 16px;
-    color-scheme: dark;
-  }
+  <meta charset="UTF-8" />
+  <script>
+    // Runs before first paint to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        var saved = localStorage.getItem('kartik-portfolio-theme');
+        var wantsLight = saved ? saved === 'light' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+        if (wantsLight) document.documentElement.setAttribute('data-theme', 'light');
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kartik Singla | Senior Frontend Engineer</title>
+  <meta name="description"
+    content="Kartik Singla, Senior Frontend Engineer specializing in micro-frontend architecture and design systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0A0D13;
+      --bg-elev: #12161F;
+      --bg-elev-2: #171C27;
+      --text: #F3F4F7;
+      --text-dim: #9CA2B0;
+      --text-faint: #5B6270;
+      --cyan: #52E8D6;
+      --violet: #A78BFA;
+      --amber: #FFB454;
+      --cyan-rgb: 82, 232, 214;
+      --violet-rgb: 167, 139, 250;
+      --amber-rgb: 255, 180, 84;
+      --fg-rgb: 255, 255, 255;
+      --line: rgba(255, 255, 255, 0.09);
+      --line-strong: rgba(255, 255, 255, 0.16);
+      --card-grad-1: #151A24;
+      --card-grad-2: #10141C;
+      --mockup-grad-1: #171C27;
+      --mockup-grad-2: #10141C;
+      --nav-bg: rgba(18, 22, 31, 0.7);
+      --cta-grad-1: #52E8D6;
+      --cta-grad-2: #A78BFA;
+      --cta-glow-rgb: 82, 232, 214;
+      --cta-fg-rgb: 255, 255, 255;
+      --radius: 16px;
+      color-scheme: dark;
+    }
 
-  [data-theme="light"] {
-    --bg: #F2F3F7;
-    --bg-elev: #FFFFFF;
-    --bg-elev-2: #ECEEF3;
-    --text: #14161C;
-    --text-dim: #4A4F5A;
-    --text-faint: #82869A;
-    --cyan: #0E8F82;
-    --violet: #6D28D9;
-    --amber: #A8560A;
-    --cyan-rgb: 14,143,130;
-    --violet-rgb: 109,40,217;
-    --amber-rgb: 168,86,10;
-    --fg-rgb: 18,20,26;
-    --line: rgba(18,20,26,0.10);
-    --line-strong: rgba(18,20,26,0.16);
-    --card-grad-1: #FFFFFF;
-    --card-grad-2: #F6F7FB;
-    --mockup-grad-1: #F3F4F8;
-    --mockup-grad-2: #EBEDF3;
-    --nav-bg: rgba(255,255,255,0.78);
-    color-scheme: light;
-  }
+    [data-theme="light"] {
+      --bg: #F2F3F7;
+      --bg-elev: #FFFFFF;
+      --bg-elev-2: #ECEEF3;
+      --text: #14161C;
+      --text-dim: #4A4F5A;
+      --text-faint: #82869A;
+      --cyan: #0E8F82;
+      --violet: #6D28D9;
+      --amber: #A8560A;
+      --cyan-rgb: 14, 143, 130;
+      --violet-rgb: 109, 40, 217;
+      --amber-rgb: 168, 86, 10;
+      --fg-rgb: 18, 20, 26;
+      --line: rgba(18, 20, 26, 0.10);
+      --line-strong: rgba(18, 20, 26, 0.16);
+      --card-grad-1: #FFFFFF;
+      --card-grad-2: #F6F7FB;
+      --mockup-grad-1: #F3F4F8;
+      --mockup-grad-2: #EBEDF3;
+      --nav-bg: rgba(255, 255, 255, 0.78);
+      color-scheme: light;
+    }
 
-  [data-theme="light"] .orb { opacity: 0.16; }
-  [data-theme="light"] .orb3 { opacity: 0.10; }
-  [data-theme="light"] body::before { opacity: 0.02; }
+    [data-theme="light"] .orb {
+      opacity: 0.16;
+    }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+    [data-theme="light"] .orb3 {
+      opacity: 0.10;
+    }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-  }
+    [data-theme="light"] body::before {
+      opacity: 0.02;
+    }
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', -apple-system, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    position: relative;
-    overflow-x: hidden;
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  .mono { font-family: 'JetBrains Mono', monospace; }
-  .display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  a { color: inherit; }
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--cyan);
-    outline-offset: 3px;
-    border-radius: 3px;
-  }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
 
-  .grad-text {
-    background: linear-gradient(100deg, var(--cyan) 0%, var(--violet) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
 
-  .wrap {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 0 28px;
-  }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-  /* ---------- AMBIENT BACKGROUND: dot grid + drifting glow orbs + cursor spotlight ---------- */
-  .bg-fixed {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image: radial-gradient(rgba(var(--fg-rgb),0.06) 1px, transparent 1px);
-    background-size: 26px 26px;
-    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 100%);
-    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 100%);
-  }
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.28;
-  }
-  .orb1 { width: 460px; height: 460px; top: -120px; left: -80px; background: var(--violet); animation: drift1 22s ease-in-out infinite; }
-  .orb2 { width: 380px; height: 380px; top: 120px; right: -100px; background: var(--cyan); animation: drift2 26s ease-in-out infinite; }
-  .orb3 { width: 320px; height: 320px; bottom: -60px; left: 30%; background: var(--amber); opacity: 0.14; animation: drift1 30s ease-in-out infinite reverse; }
-  @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(40px, 50px); } }
-  @keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-50px, 30px); } }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
 
-  .spotlight {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: radial-gradient(600px circle at var(--sx,50%) var(--sy,20%), rgba(var(--cyan-rgb),0.06), transparent 70%);
-    transition: background .1s linear;
-  }
+    .display {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+    }
 
-  /* ---------- NAV ---------- */
-  nav {
-    position: sticky;
-    top: 18px;
-    z-index: 50;
-    display: flex;
-    justify-content: center;
-    padding: 0 16px;
-  }
-  .nav-pill {
-    width: 100%;
-    max-width: 760px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 58px;
-    padding: 0 8px 0 22px;
-    background: var(--nav-bg);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    box-shadow: 0 12px 34px rgba(0,0,0,0.35);
-  }
-  .nav-mark {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    font-size: 13.5px;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: var(--text);
-  }
-  .nav-mark .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 12px var(--cyan);
-    display: inline-block;
-  }
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-    margin: 0; padding: 0;
-    font-size: 13.5px;
-    font-weight: 500;
-  }
-  .nav-links a { text-decoration: none; color: var(--text-dim); transition: color .15s; }
-  .nav-links a:hover { color: var(--text); }
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-  .nav-cta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    padding: 10px 18px;
-    background: linear-gradient(100deg, var(--cta-grad-1), var(--cta-grad-2));
-    color: #0A0D13;
-    font-weight: 600;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: all .2s;
-  }
-  .nav-cta:hover { transform: translateY(-1px) scale(1.03); filter: brightness(1.08); }
+    a {
+      color: inherit;
+    }
 
-  @media (max-width: 640px) { .nav-links { display: none; } }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
 
-  /* ---------- THEME TOGGLE ---------- */
-  .theme-toggle {
-    width: 36px; height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 1px solid var(--line-strong);
-    background: rgba(var(--fg-rgb),0.04);
-    color: var(--text-dim);
-    cursor: pointer;
-    transition: all .2s cubic-bezier(.2,.8,.2,1);
-    flex-shrink: 0;
-    margin-right: 8px;
-    padding: 0;
-  }
-  .theme-toggle:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-1px) rotate(12deg); }
-  .theme-toggle svg { width: 16px; height: 16px; display: block; }
-  .theme-toggle .icon-sun { display: none; }
-  [data-theme="light"] .theme-toggle .icon-moon { display: none; }
-  [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+    .grad-text {
+      background: linear-gradient(100deg, var(--cyan) 0%, var(--violet) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-  /* ---------- HERO ---------- */
-  header.hero {
-    position: relative;
-    z-index: 2;
-    padding: 108px 0 0;
-    text-align: center;
-  }
-  .status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.03em;
-    color: var(--text-dim);
-    background: var(--bg-elev);
-    border: 1px solid var(--line-strong);
-    padding: 8px 16px 8px 12px;
-    border-radius: 999px;
-    margin: 0 0 34px;
-  }
-  .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: #3DDC84; position: relative; flex-shrink: 0; }
-  .pulse-dot::after {
-    content: ""; position: absolute; inset: -4px; border-radius: 50%;
-    background: #3DDC84; opacity: 0.4; animation: pulse 2s ease-out infinite;
-  }
-  @keyframes pulse { 0% { transform: scale(0.6); opacity: 0.5; } 100% { transform: scale(2.2); opacity: 0; } }
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
 
-  h1.headline {
-    font-size: clamp(42px, 7.4vw, 92px);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    margin: 0 auto 26px;
-    font-weight: 700;
-    max-width: 900px;
-  }
+    /* ---------- AMBIENT BACKGROUND: dot grid + drifting glow orbs + cursor spotlight ---------- */
+    .bg-fixed {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(var(--fg-rgb), 0.06) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 100%);
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 100%);
+    }
 
-  .role-line {
-    font-size: clamp(17px, 2vw, 20px);
-    color: var(--text-dim);
-    margin: 0 auto 48px;
-    max-width: 580px;
-  }
-  .role-line strong { color: var(--text); font-weight: 600; }
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.28;
+    }
 
-  .cta-row {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 68px;
-  }
-  .btn {
-    position: relative;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    padding: 11px 19px;
-    border-radius: 999px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .25s, filter .2s;
-    border: 1px solid transparent;
-    font-weight: 500;
-    will-change: transform;
-  }
-  .btn:active { transform: translateY(-1px) scale(0.98) !important; transition-duration: .08s; }
-  .btn-primary {
-    background: linear-gradient(100deg, var(--cta-grad-1), var(--cta-grad-2));
-    color: #0A0D13;
-    font-weight: 600;
-    box-shadow:
-      0 6px 18px rgba(var(--cta-glow-rgb),0.28),
-      0 2px 5px rgba(0,0,0,0.22),
-      inset 0 1px 0 rgba(var(--cta-fg-rgb),0.45),
-      inset 0 -6px 10px rgba(0,0,0,0.08);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px) scale(1.015);
-    filter: brightness(1.05);
-    box-shadow:
-      0 10px 26px rgba(var(--cta-glow-rgb),0.4),
-      0 3px 8px rgba(0,0,0,0.28),
-      inset 0 1px 0 rgba(var(--cta-fg-rgb),0.5),
-      inset 0 -6px 10px rgba(0,0,0,0.08);
-  }
-  .btn-secondary {
-    border-color: var(--line-strong);
-    color: var(--text);
-    background: linear-gradient(180deg, rgba(var(--fg-rgb),0.05), rgba(var(--fg-rgb),0.015));
-    box-shadow: inset 0 1px 0 rgba(var(--fg-rgb),0.06), 0 1px 2px rgba(0,0,0,0.2);
-  }
-  .btn-secondary:hover {
-    border-color: var(--cyan);
-    transform: translateY(-2px);
-    color: var(--cyan);
-    box-shadow: 0 8px 20px rgba(var(--cyan-rgb),0.13), inset 0 1px 0 rgba(var(--fg-rgb),0.08);
-  }
+    .orb1 {
+      width: 460px;
+      height: 460px;
+      top: -120px;
+      left: -80px;
+      background: var(--violet);
+      animation: drift1 22s ease-in-out infinite;
+    }
 
-  /* ---------- STAT ROW ---------- */
-  .stat-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 640px;
-    margin: 0 auto 100px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .stat { padding: 28px 12px; text-align: center; border-right: 1px solid var(--line); }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(28px, 4vw, 40px);
-    font-weight: 700;
-    background: linear-gradient(100deg, var(--cyan), var(--violet));
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .stat-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--text-faint);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-top: 6px;
-  }
+    .orb2 {
+      width: 380px;
+      height: 380px;
+      top: 120px;
+      right: -100px;
+      background: var(--cyan);
+      animation: drift2 26s ease-in-out infinite;
+    }
 
-  /* ---------- MARQUEE ---------- */
-  .marquee-wrap {
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 22px 0;
-    background: var(--bg-elev);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .marquee-track {
-    display: flex;
-    gap: 40px;
-    width: max-content;
-    animation: scrollLeft 32s linear infinite;
-  }
-  @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .marquee-item {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: var(--text-dim);
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    white-space: nowrap;
-  }
-  .marquee-item .sep { color: var(--violet); }
+    .orb3 {
+      width: 320px;
+      height: 320px;
+      bottom: -60px;
+      left: 30%;
+      background: var(--amber);
+      opacity: 0.14;
+      animation: drift1 30s ease-in-out infinite reverse;
+    }
 
-  /* ---------- SECTION SHELL ---------- */
-  section { position: relative; z-index: 2; padding: 100px 0; }
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 44px;
-    gap: 16px;
-  }
-  .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--cyan);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0 0 10px;
-  }
-  .section-title {
-    font-size: clamp(30px, 3.6vw, 42px);
-    font-weight: 700;
-    margin: 0;
-    letter-spacing: -0.02em;
-  }
-  .section-index {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--text-faint);
-  }
+    @keyframes drift1 {
 
-  /* ---------- ABOUT ---------- */
-  .about-text {
-    font-size: 19px;
-    max-width: 720px;
-    color: var(--text-dim);
-  }
-  .about-text p { margin: 0 0 18px; }
-  .about-text strong { color: var(--text); font-weight: 600; }
-  .pull-quote {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(22px, 3vw, 30px);
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.35;
-    max-width: 780px;
-    margin: 0 0 32px;
-    letter-spacing: -0.01em;
-  }
-  .pull-quote .grad-text { font-weight: 700; }
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
 
-  /* ---------- SYSTEMS / PROJECTS ---------- */
-  .systems-list { display: flex; flex-direction: column; gap: 26px; }
-  .system-card {
-    position: relative;
-    background: linear-gradient(165deg, var(--card-grad-1), var(--card-grad-2));
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: inset 0 1px 0 rgba(var(--fg-rgb),0.05), 0 1px 2px rgba(0,0,0,0.3);
-    transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .35s;
-  }
-  .system-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(var(--cyan-rgb),0.45);
-    box-shadow:
-      inset 0 1px 0 rgba(var(--fg-rgb),0.08),
-      0 24px 50px rgba(var(--cyan-rgb),0.10),
-      0 10px 26px rgba(var(--violet-rgb),0.10),
-      0 4px 12px rgba(0,0,0,0.4);
-  }
-  .system-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 0;
-  }
-  @media (max-width: 760px) { .system-inner { grid-template-columns: 1fr; } }
+      50% {
+        transform: translate(40px, 50px);
+      }
+    }
 
-  .mockup-panel {
-    background: linear-gradient(150deg, var(--mockup-grad-1), var(--mockup-grad-2));
-    border-right: 1px solid var(--line);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  @media (max-width: 760px) { .mockup-panel { border-right: none; border-bottom: 1px solid var(--line); } }
-  .mockup-chrome { display: flex; gap: 5px; margin-bottom: 16px; }
-  .mockup-chrome span { width: 8px; height: 8px; border-radius: 50%; background: rgba(var(--fg-rgb),0.14); }
+    @keyframes drift2 {
 
-  /* Kulcare */
-  .mk-row { display: flex; gap: 10px; height: 118px; }
-  .mk-sidebar { width: 40px; background: rgba(var(--fg-rgb),0.03); border: 1px solid var(--line); border-radius: 8px; padding: 8px 6px; display: flex; flex-direction: column; gap: 8px; }
-  .mk-sidebar span { height: 5px; border-radius: 3px; background: rgba(var(--fg-rgb),0.1); }
-  .mk-sidebar span:first-child { background: var(--cyan); width: 70%; box-shadow: 0 0 6px var(--cyan); }
-  .mk-main { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-  .mk-stats { display: flex; gap: 8px; }
-  .mk-stat { flex: 1; background: rgba(var(--fg-rgb),0.03); border: 1px solid var(--line); border-radius: 7px; padding: 9px; }
-  .mk-stat .bar { height: 4px; border-radius: 2px; background: rgba(var(--violet-rgb),0.4); margin-bottom: 7px; width: 60%; }
-  .mk-stat .num { height: 10px; width: 45%; border-radius: 2px; background: var(--text); opacity: 0.9; }
-  .mk-chart { height: 54px; background: rgba(var(--fg-rgb),0.03); border: 1px solid var(--line); border-radius: 7px; display: flex; align-items: flex-end; gap: 4px; padding: 8px; }
-  .mk-chart i { flex: 1; background: linear-gradient(180deg, var(--cyan), var(--violet)); border-radius: 2px 2px 0 0; display: block; }
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
 
-  /* ONDC */
-  .mo-grid { display: flex; flex-wrap: wrap; gap: 8px; height: 118px; }
-  .mo-tile { flex: 1 1 22%; background: rgba(var(--fg-rgb),0.03); border: 1px solid var(--line); border-radius: 7px; padding: 7px; height: 55px; display: flex; flex-direction: column; gap: 5px; }
-  .mo-tile .thumb { height: 30px; border-radius: 4px; background: rgba(var(--amber-rgb),0.18); }
-  .mo-tile .thumb.alt { background: rgba(var(--cyan-rgb),0.15); }
-  .mo-tile .line { height: 4px; border-radius: 2px; background: rgba(var(--fg-rgb),0.1); }
+      50% {
+        transform: translate(-50px, 30px);
+      }
+    }
 
-  /* Zanran */
-  .mz-col { display: flex; flex-direction: column; gap: 8px; height: 118px; justify-content: center; }
-  .mz-search { background: rgba(var(--fg-rgb),0.03); border: 1px solid var(--line); border-radius: 7px; height: 26px; display: flex; align-items: center; padding: 0 10px; gap: 7px; }
-  .mz-search .icon { width: 9px; height: 9px; border: 1.5px solid var(--cyan); border-radius: 50%; opacity: 0.7; }
-  .mz-search .line { height: 4px; width: 40%; background: rgba(var(--fg-rgb),0.12); border-radius: 2px; }
-  .mz-row { background: rgba(var(--fg-rgb),0.03); border: 1px solid var(--line); border-radius: 7px; height: 22px; display: flex; align-items: center; padding: 0 10px; gap: 8px; }
-  .mz-row .dot2 { width: 5px; height: 5px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
-  .mz-row .line { height: 4px; border-radius: 2px; background: rgba(var(--fg-rgb),0.1); }
+    .spotlight {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: radial-gradient(600px circle at var(--sx, 50%) var(--sy, 20%), rgba(var(--cyan-rgb), 0.06), transparent 70%);
+      transition: background .1s linear;
+    }
 
-  .system-content { padding: 30px 32px; }
-  .system-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
-  .system-name { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; }
-  .system-name .tag-bracket { color: var(--cyan); }
-  .system-domain {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--amber);
-    background: rgba(var(--amber-rgb),0.12);
-    border: 1px solid rgba(var(--amber-rgb),0.25);
-    padding: 4px 10px;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .system-desc { color: var(--text-dim); margin: 0 0 20px; font-size: 15.5px; }
-  .stack-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .stack-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text-dim);
-    background: rgba(var(--fg-rgb),0.04);
-    border: 1px solid var(--line);
-    padding: 5px 11px;
-    border-radius: 6px;
-  }
+    /* ---------- NAV ---------- */
+    nav {
+      position: sticky;
+      top: 18px;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding: 0 16px;
+    }
 
-  /* ---------- EXPERIENCE TIMELINE ---------- */
-  .timeline { position: relative; padding-left: 36px; }
-  .timeline::before {
-    content: "";
-    position: absolute; left: 9px; top: 8px; bottom: 8px; width: 1px;
-    background: linear-gradient(180deg, var(--cyan), var(--violet), transparent);
-  }
-  .tl-item { position: relative; margin-bottom: 46px; }
-  .tl-item:last-child { margin-bottom: 0; }
-  .tl-item::before {
-    content: "";
-    position: absolute; left: -36px; top: 6px;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--cyan);
-    box-shadow: 0 0 12px rgba(var(--cyan-rgb),0.5);
-    transition: box-shadow .25s, transform .25s;
-  }
-  .tl-item:hover::before { box-shadow: 0 0 20px rgba(var(--cyan-rgb),0.85); transform: scale(1.2); }
-  .tl-item:hover .tl-role { color: var(--cyan); }
-  .tl-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
-  .tl-role { font-size: 19px; font-weight: 600; transition: color .2s; }
-  .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text-faint); }
-  .tl-company { color: var(--text-dim); font-size: 14.5px; margin-bottom: 14px; }
-  .tl-company strong { color: var(--text); font-weight: 500; }
-  .tl-bullets { margin: 0; padding-left: 18px; }
-  .tl-bullets li { margin-bottom: 8px; font-size: 15px; color: var(--text-dim); }
-  .tl-bullets li::marker { color: var(--violet); }
+    .nav-pill {
+      width: 100%;
+      max-width: 760px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      padding: 0 8px 0 22px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
+    }
 
-  /* ---------- SKILLS ---------- */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-  }
-  .skill-card {
-    background: linear-gradient(165deg, var(--card-grad-1), var(--card-grad-2));
-    border: 1px solid var(--line-strong);
-    border-radius: 12px;
-    padding: 22px 24px;
-    box-shadow: inset 0 1px 0 rgba(var(--fg-rgb),0.05), 0 1px 2px rgba(0,0,0,0.25);
-    transition: border-color .25s, transform .25s, box-shadow .25s;
-  }
-  .skill-card:hover {
-    border-color: rgba(var(--cyan-rgb),0.35);
-    transform: translateY(-3px);
-    box-shadow: inset 0 1px 0 rgba(var(--fg-rgb),0.07), 0 14px 30px rgba(var(--cyan-rgb),0.08), 0 4px 10px rgba(0,0,0,0.3);
-  }
-  .skill-cat-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--cyan);
-    margin-bottom: 14px;
-  }
-  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    font-size: 13.5px;
-    padding: 6px 12px;
-    background: rgba(var(--fg-rgb),0.04);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    color: var(--text-dim);
-    transition: all .18s cubic-bezier(.2,.8,.2,1);
-  }
-  .chip:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(var(--cyan-rgb),0.1); transform: translateY(-1px) scale(1.03); }
+    .nav-mark {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 13.5px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--text);
+    }
 
-  /* ---------- EDUCATION ---------- */
-  .edu-card {
-    background: linear-gradient(165deg, var(--card-grad-1), var(--card-grad-2));
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    padding: 28px 32px;
-    box-shadow: inset 0 1px 0 rgba(var(--fg-rgb),0.05), 0 1px 2px rgba(0,0,0,0.25);
-    transition: border-color .25s, box-shadow .25s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .edu-card:hover { border-color: rgba(var(--cyan-rgb),0.3); }
-  .edu-school { font-size: 18px; font-weight: 600; }
-  .edu-sub { color: var(--text-dim); font-size: 14.5px; margin-top: 4px; }
-  .edu-year { font-family: 'JetBrains Mono', monospace; color: var(--text-faint); font-size: 13.5px; }
+    .nav-mark .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
+      display: inline-block;
+    }
 
-  /* ---------- FOOTER ---------- */
-  footer { position: relative; z-index: 2; padding: 120px 0 60px; text-align: center; overflow: hidden; }
-  .contact-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    color: var(--cyan);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 20px;
-  }
-  .contact-title {
-    font-size: clamp(34px, 6vw, 64px);
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    margin: 0 0 40px;
-    line-height: 1.06;
-  }
-  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 72px; }
-  .foot-note { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-faint); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 13.5px;
+      font-weight: 500;
+    }
 
-  /* ---------- ENTRANCE (pure CSS, no JS dependency) ---------- */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal { animation: fadeUp 0.8s cubic-bezier(.2,.7,.2,1) both; }
-</style>
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dim);
+      transition: color .15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      padding: 10px 18px;
+      background: linear-gradient(100deg, var(--cta-grad-1), var(--cta-grad-2));
+      color: #0A0D13;
+      font-weight: 600;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all .2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px) scale(1.03);
+      filter: brightness(1.08);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ---------- THEME TOGGLE ---------- */
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+      background: rgba(var(--fg-rgb), 0.04);
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all .2s cubic-bezier(.2, .8, .2, 1);
+      flex-shrink: 0;
+      margin-right: 8px;
+      padding: 0;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-1px) rotate(12deg);
+    }
+
+    .theme-toggle svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .theme-toggle .icon-sun {
+      display: none;
+    }
+
+    [data-theme="light"] .theme-toggle .icon-moon {
+      display: none;
+    }
+
+    [data-theme="light"] .theme-toggle .icon-sun {
+      display: block;
+    }
+
+    /* ---------- HERO ---------- */
+    header.hero {
+      position: relative;
+      z-index: 2;
+      padding: 108px 0 0;
+      text-align: center;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      color: var(--text-dim);
+      background: var(--bg-elev);
+      border: 1px solid var(--line-strong);
+      padding: 8px 16px 8px 12px;
+      border-radius: 999px;
+      margin: 0 0 34px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3DDC84;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pulse-dot::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: #3DDC84;
+      opacity: 0.4;
+      animation: pulse 2s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    h1.headline {
+      font-size: clamp(42px, 7.4vw, 92px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin: 0 auto 26px;
+      font-weight: 700;
+      max-width: 900px;
+    }
+
+    .role-line {
+      font-size: clamp(17px, 2vw, 20px);
+      color: var(--text-dim);
+      margin: 0 auto 48px;
+      max-width: 580px;
+    }
+
+    .role-line strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 68px;
+    }
+
+    .btn {
+      position: relative;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 11px 19px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform .2s cubic-bezier(.2, .8, .2, 1), box-shadow .25s, filter .2s;
+      border: 1px solid transparent;
+      font-weight: 500;
+      will-change: transform;
+    }
+
+    .btn:active {
+      transform: translateY(-1px) scale(0.98) !important;
+      transition-duration: .08s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(100deg, var(--cta-grad-1), var(--cta-grad-2));
+      color: #0A0D13;
+      font-weight: 600;
+      box-shadow:
+        0 6px 18px rgba(var(--cta-glow-rgb), 0.28),
+        0 2px 5px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(var(--cta-fg-rgb), 0.45),
+        inset 0 -6px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.015);
+      filter: brightness(1.05);
+      box-shadow:
+        0 10px 26px rgba(var(--cta-glow-rgb), 0.4),
+        0 3px 8px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(var(--cta-fg-rgb), 0.5),
+        inset 0 -6px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-secondary {
+      border-color: var(--line-strong);
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(var(--fg-rgb), 0.05), rgba(var(--fg-rgb), 0.015));
+      box-shadow: inset 0 1px 0 rgba(var(--fg-rgb), 0.06), 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      color: var(--cyan);
+      box-shadow: 0 8px 20px rgba(var(--cyan-rgb), 0.13), inset 0 1px 0 rgba(var(--fg-rgb), 0.08);
+    }
+
+    /* ---------- STAT ROW ---------- */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 640px;
+      margin: 0 auto 100px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat {
+      padding: 28px 12px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      background: linear-gradient(100deg, var(--cyan), var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+    }
+
+    /* ---------- MARQUEE ---------- */
+    .marquee-wrap {
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 22px 0;
+      background: var(--bg-elev);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 40px;
+      width: max-content;
+      animation: scrollLeft 32s linear infinite;
+    }
+
+    @keyframes scrollLeft {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      white-space: nowrap;
+    }
+
+    .marquee-item .sep {
+      color: var(--violet);
+    }
+
+    /* ---------- SECTION SHELL ---------- */
+    section {
+      position: relative;
+      z-index: 2;
+      padding: 100px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 44px;
+      gap: 16px;
+    }
+
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 10px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 3.6vw, 42px);
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .section-index {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about-text {
+      font-size: 19px;
+      max-width: 720px;
+      color: var(--text-dim);
+    }
+
+    .about-text p {
+      margin: 0 0 18px;
+    }
+
+    .about-text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .pull-quote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      max-width: 780px;
+      margin: 0 0 32px;
+      letter-spacing: -0.01em;
+    }
+
+    .pull-quote .grad-text {
+      font-weight: 700;
+    }
+
+    /* ---------- SYSTEMS / PROJECTS ---------- */
+    .systems-list {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .system-card {
+      position: relative;
+      background: linear-gradient(165deg, var(--card-grad-1), var(--card-grad-2));
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(var(--fg-rgb), 0.05), 0 1px 2px rgba(0, 0, 0, 0.3);
+      transition: transform .35s cubic-bezier(.2, .8, .2, 1), border-color .35s, box-shadow .35s;
+    }
+
+    .system-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(var(--cyan-rgb), 0.45);
+      box-shadow:
+        inset 0 1px 0 rgba(var(--fg-rgb), 0.08),
+        0 24px 50px rgba(var(--cyan-rgb), 0.10),
+        0 10px 26px rgba(var(--violet-rgb), 0.10),
+        0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .system-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 0;
+    }
+
+    @media (max-width: 760px) {
+      .system-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mockup-panel {
+      background: linear-gradient(150deg, var(--mockup-grad-1), var(--mockup-grad-2));
+      border-right: 1px solid var(--line);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 760px) {
+      .mockup-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    .mockup-chrome {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 16px;
+    }
+
+    .mockup-chrome span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(var(--fg-rgb), 0.14);
+    }
+
+    /* Kulcare */
+    .mk-row {
+      display: flex;
+      gap: 10px;
+      height: 118px;
+    }
+
+    .mk-sidebar {
+      width: 40px;
+      background: rgba(var(--fg-rgb), 0.03);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mk-sidebar span {
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(var(--fg-rgb), 0.1);
+    }
+
+    .mk-sidebar span:first-child {
+      background: var(--cyan);
+      width: 70%;
+      box-shadow: 0 0 6px var(--cyan);
+    }
+
+    .mk-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mk-stats {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mk-stat {
+      flex: 1;
+      background: rgba(var(--fg-rgb), 0.03);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 9px;
+    }
+
+    .mk-stat .bar {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(var(--violet-rgb), 0.4);
+      margin-bottom: 7px;
+      width: 60%;
+    }
+
+    .mk-stat .num {
+      height: 10px;
+      width: 45%;
+      border-radius: 2px;
+      background: var(--text);
+      opacity: 0.9;
+    }
+
+    .mk-chart {
+      height: 54px;
+      background: rgba(var(--fg-rgb), 0.03);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      padding: 8px;
+    }
+
+    .mk-chart i {
+      flex: 1;
+      background: linear-gradient(180deg, var(--cyan), var(--violet));
+      border-radius: 2px 2px 0 0;
+      display: block;
+    }
+
+    /* ONDC */
+    .mo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      height: 118px;
+    }
+
+    .mo-tile {
+      flex: 1 1 22%;
+      background: rgba(var(--fg-rgb), 0.03);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 7px;
+      height: 55px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mo-tile .thumb {
+      height: 30px;
+      border-radius: 4px;
+      background: rgba(var(--amber-rgb), 0.18);
+    }
+
+    .mo-tile .thumb.alt {
+      background: rgba(var(--cyan-rgb), 0.15);
+    }
+
+    .mo-tile .line {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(var(--fg-rgb), 0.1);
+    }
+
+    /* Zanran */
+    .mz-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 118px;
+      justify-content: center;
+    }
+
+    .mz-search {
+      background: rgba(var(--fg-rgb), 0.03);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 7px;
+    }
+
+    .mz-search .icon {
+      width: 9px;
+      height: 9px;
+      border: 1.5px solid var(--cyan);
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    .mz-search .line {
+      height: 4px;
+      width: 40%;
+      background: rgba(var(--fg-rgb), 0.12);
+      border-radius: 2px;
+    }
+
+    .mz-row {
+      background: rgba(var(--fg-rgb), 0.03);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 8px;
+    }
+
+    .mz-row .dot2 {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .mz-row .line {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(var(--fg-rgb), 0.1);
+    }
+
+    .system-content {
+      padding: 30px 32px;
+    }
+
+    .system-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .system-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .system-name .tag-bracket {
+      color: var(--cyan);
+    }
+
+    .system-domain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--amber);
+      background: rgba(var(--amber-rgb), 0.12);
+      border: 1px solid rgba(var(--amber-rgb), 0.25);
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .system-desc {
+      color: var(--text-dim);
+      margin: 0 0 20px;
+      font-size: 15.5px;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stack-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+      background: rgba(var(--fg-rgb), 0.04);
+      border: 1px solid var(--line);
+      padding: 5px 11px;
+      border-radius: 6px;
+    }
+
+    /* ---------- EXPERIENCE TIMELINE ---------- */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--cyan), var(--violet), transparent);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 46px;
+    }
+
+    .tl-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 12px rgba(var(--cyan-rgb), 0.5);
+      transition: box-shadow .25s, transform .25s;
+    }
+
+    .tl-item:hover::before {
+      box-shadow: 0 0 20px rgba(var(--cyan-rgb), 0.85);
+      transform: scale(1.2);
+    }
+
+    .tl-item:hover .tl-role {
+      color: var(--cyan);
+    }
+
+    .tl-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .tl-role {
+      font-size: 19px;
+      font-weight: 600;
+      transition: color .2s;
+    }
+
+    .tl-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--text-faint);
+    }
+
+    .tl-company {
+      color: var(--text-dim);
+      font-size: 14.5px;
+      margin-bottom: 14px;
+    }
+
+    .tl-company strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .tl-bullets {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .tl-bullets li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: var(--text-dim);
+    }
+
+    .tl-bullets li::marker {
+      color: var(--violet);
+    }
+
+    /* ---------- SKILLS ---------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: linear-gradient(165deg, var(--card-grad-1), var(--card-grad-2));
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: 22px 24px;
+      box-shadow: inset 0 1px 0 rgba(var(--fg-rgb), 0.05), 0 1px 2px rgba(0, 0, 0, 0.25);
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(var(--cyan-rgb), 0.35);
+      transform: translateY(-3px);
+      box-shadow: inset 0 1px 0 rgba(var(--fg-rgb), 0.07), 0 14px 30px rgba(var(--cyan-rgb), 0.08), 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .skill-cat-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cyan);
+      margin-bottom: 14px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 13.5px;
+      padding: 6px 12px;
+      background: rgba(var(--fg-rgb), 0.04);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      color: var(--text-dim);
+      transition: all .18s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .chip:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(var(--cyan-rgb), 0.1);
+      transform: translateY(-1px) scale(1.03);
+    }
+
+    /* ---------- EDUCATION ---------- */
+    .edu-card {
+      background: linear-gradient(165deg, var(--card-grad-1), var(--card-grad-2));
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: inset 0 1px 0 rgba(var(--fg-rgb), 0.05), 0 1px 2px rgba(0, 0, 0, 0.25);
+      transition: border-color .25s, box-shadow .25s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .edu-card:hover {
+      border-color: rgba(var(--cyan-rgb), 0.3);
+    }
+
+    .edu-school {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .edu-sub {
+      color: var(--text-dim);
+      font-size: 14.5px;
+      margin-top: 4px;
+    }
+
+    .edu-year {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-faint);
+      font-size: 13.5px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .contact-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .contact-title {
+      font-size: clamp(34px, 6vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin: 0 0 40px;
+      line-height: 1.06;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 72px;
+    }
+
+    .foot-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    /* ---------- ENTRANCE (pure CSS, no JS dependency) ---------- */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      animation: fadeUp 0.8s cubic-bezier(.2, .7, .2, 1) both;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="bg-fixed" aria-hidden="true"></div>
-<div class="orb orb1" aria-hidden="true"></div>
-<div class="orb orb2" aria-hidden="true"></div>
-<div class="orb orb3" aria-hidden="true"></div>
-<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <div class="bg-fixed" aria-hidden="true"></div>
+  <div class="orb orb1" aria-hidden="true"></div>
+  <div class="orb orb2" aria-hidden="true"></div>
+  <div class="orb orb3" aria-hidden="true"></div>
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
 
-<nav>
-  <div class="nav-pill">
-    <a href="#top" class="nav-mark"><span class="dot"></span>KARTIK SINGLA</a>
-    <ul class="nav-links">
-      <li><a href="#systems">Systems</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-    </ul>
-    <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-      </button>
-      <a class="nav-cta" href="Kartik_Singla_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="wrap">
-    <span class="status-pill"><span class="pulse-dot"></span>Open to senior frontend roles · Mohali, India</span>
-    <h1 class="headline display">Building frontend<br><span class="grad-text">systems that scale.</span></h1>
-    <p class="role-line">Senior Frontend Engineer specializing in <strong>micro-frontend architecture</strong> and <strong>design systems</strong> — across healthcare, e-commerce, and document intelligence.</p>
-
-    <div class="cta-row">
-      <a class="btn btn-primary" href="mailto:kartiksingla2000@gmail.com">Email me →</a>
-      <a class="btn btn-secondary" href="Kartik_Singla_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
-      <a class="btn btn-secondary" href="https://www.linkedin.com/in/kartik-singla-9b7b60231/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-secondary" href="https://github.com/SinglaKartik" target="_blank" rel="noopener">GitHub</a>
-    </div>
-
-    <div class="stat-row reveal">
-      <div class="stat"><div class="stat-num mono">5+</div><div class="stat-label">Years shipping</div></div>
-      <div class="stat"><div class="stat-num mono">3</div><div class="stat-label">Systems in production</div></div>
-      <div class="stat"><div class="stat-num mono">10K+</div><div class="stat-label">Docs processed / Zanran</div></div>
-    </div>
-  </div>
-</header>
-
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">
-      <span>REACT.JS</span><span class="sep">✦</span>
-      <span>NEXT.JS</span><span class="sep">✦</span>
-      <span>TYPESCRIPT</span><span class="sep">✦</span>
-      <span>MICRO FRONTENDS</span><span class="sep">✦</span>
-      <span>GRAPHQL</span><span class="sep">✦</span>
-      <span>DESIGN SYSTEMS</span><span class="sep">✦</span>
-    </div>
-    <div class="marquee-item">
-      <span>REACT.JS</span><span class="sep">✦</span>
-      <span>NEXT.JS</span><span class="sep">✦</span>
-      <span>TYPESCRIPT</span><span class="sep">✦</span>
-      <span>MICRO FRONTENDS</span><span class="sep">✦</span>
-      <span>GRAPHQL</span><span class="sep">✦</span>
-      <span>DESIGN SYSTEMS</span><span class="sep">✦</span>
-    </div>
-  </div>
-</div>
-
-<section id="about">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="section-eyebrow mono">01 — About</p>
-        <h2 class="section-title display">Who's building this?</h2>
+  <nav>
+    <div class="nav-pill">
+      <a href="#top" class="nav-mark"><span class="dot"></span>KARTIK SINGLA</a>
+      <ul class="nav-links">
+        <li><a href="#systems">Systems</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        </button>
+        <a class="nav-cta" href="Kartik_Singla_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
     </div>
-    <p class="pull-quote display reveal">I build the systems <span class="grad-text">underneath</span> the screen — not just the screen itself.</p>
-    <div class="about-text reveal">
-      <p>I'm a <strong>Senior Frontend Engineer</strong> with 5+ years building scalable, enterprise-grade web applications across <strong>healthcare, e-commerce, and document-intelligence</strong> domains. Most of that time has gone into problems bigger than any single screen: how a component library stays consistent across a dozen teams, how a marketplace's admin panel and storefront share the same data contracts, how a search interface stays fast at ten thousand documents.</p>
-      <p>Currently building <strong>Kulcare</strong>, an enterprise healthcare platform, at <strong>Addval Solutions</strong> — working within a micro-frontend architecture that spans patient management, telehealth, and clinical operations.</p>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<section id="systems">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="section-eyebrow mono">02 — Systems Built</p>
-        <h2 class="section-title display">Production, not prototypes.</h2>
+  <header class="hero" id="top">
+    <div class="wrap">
+      <span class="status-pill"><span class="pulse-dot"></span>Open to senior frontend roles · Mohali, India</span>
+      <h1 class="headline display">Building frontend<br><span class="grad-text">systems that scale.</span></h1>
+      <p class="role-line">Senior Frontend Engineer specializing in <strong>micro-frontend architecture</strong> and
+        <strong>design systems</strong> — across healthcare, e-commerce, and document intelligence.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=kartiksingla2000@gmail.com" target="_blank" rel="noopener">Email me →</a>
+        <a class="btn btn-secondary" href="Kartik_Singla_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/kartik-singla-9b7b60231/" target="_blank"
+          rel="noopener">LinkedIn</a>
+        <a class="btn btn-secondary" href="https://github.com/SinglaKartik" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <div class="stat-row reveal">
+        <div class="stat">
+          <div class="stat-num mono">5+</div>
+          <div class="stat-label">Years shipping</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num mono">3</div>
+          <div class="stat-label">Systems in production</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num mono">10K+</div>
+          <div class="stat-label">Docs processed / Zanran</div>
+        </div>
       </div>
     </div>
-    <div class="systems-list">
+  </header>
 
-      <div class="system-card reveal">
-        <div class="system-inner">
-          <div class="mockup-panel">
-            <div class="mockup-chrome"><span></span><span></span><span></span></div>
-            <div class="mk-row">
-              <div class="mk-sidebar"><span></span><span></span><span></span><span></span></div>
-              <div class="mk-main">
-                <div class="mk-stats">
-                  <div class="mk-stat"><div class="bar"></div><div class="num"></div></div>
-                  <div class="mk-stat"><div class="bar"></div><div class="num"></div></div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item">
+        <span>REACT.JS</span><span class="sep">✦</span>
+        <span>NEXT.JS</span><span class="sep">✦</span>
+        <span>TYPESCRIPT</span><span class="sep">✦</span>
+        <span>MICRO FRONTENDS</span><span class="sep">✦</span>
+        <span>GRAPHQL</span><span class="sep">✦</span>
+        <span>DESIGN SYSTEMS</span><span class="sep">✦</span>
+      </div>
+      <div class="marquee-item">
+        <span>REACT.JS</span><span class="sep">✦</span>
+        <span>NEXT.JS</span><span class="sep">✦</span>
+        <span>TYPESCRIPT</span><span class="sep">✦</span>
+        <span>MICRO FRONTENDS</span><span class="sep">✦</span>
+        <span>GRAPHQL</span><span class="sep">✦</span>
+        <span>DESIGN SYSTEMS</span><span class="sep">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow mono">01 — About</p>
+          <h2 class="section-title display">Who's building this?</h2>
+        </div>
+      </div>
+      <p class="pull-quote display reveal">I build the systems <span class="grad-text">underneath</span> the screen —
+        not just the screen itself.</p>
+      <div class="about-text reveal">
+        <p>I'm a <strong>Senior Frontend Engineer</strong> with 5+ years building scalable, enterprise-grade web
+          applications across <strong>healthcare, e-commerce, and document-intelligence</strong> domains. Most of that
+          time has gone into problems bigger than any single screen: how a component library stays consistent across a
+          dozen teams, how a marketplace's admin panel and storefront share the same data contracts, how a search
+          interface stays fast at ten thousand documents.</p>
+        <p>Currently building <strong>Kulcare</strong>, an enterprise healthcare platform, at <strong>Addval
+            Solutions</strong> — working within a micro-frontend architecture that spans patient management, telehealth,
+          and clinical operations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="systems">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow mono">02 — Systems Built</p>
+          <h2 class="section-title display">Production, not prototypes.</h2>
+        </div>
+      </div>
+      <div class="systems-list">
+
+        <div class="system-card reveal">
+          <div class="system-inner">
+            <div class="mockup-panel">
+              <div class="mockup-chrome"><span></span><span></span><span></span></div>
+              <div class="mk-row">
+                <div class="mk-sidebar"><span></span><span></span><span></span><span></span></div>
+                <div class="mk-main">
+                  <div class="mk-stats">
+                    <div class="mk-stat">
+                      <div class="bar"></div>
+                      <div class="num"></div>
+                    </div>
+                    <div class="mk-stat">
+                      <div class="bar"></div>
+                      <div class="num"></div>
+                    </div>
+                  </div>
+                  <div class="mk-chart"><i style="height:14px"></i><i style="height:28px"></i><i
+                      style="height:18px"></i><i style="height:36px"></i><i style="height:22px"></i><i
+                      style="height:32px"></i></div>
                 </div>
-                <div class="mk-chart"><i style="height:14px"></i><i style="height:28px"></i><i style="height:18px"></i><i style="height:36px"></i><i style="height:22px"></i><i style="height:32px"></i></div>
+              </div>
+            </div>
+            <div class="system-content">
+              <div class="system-head">
+                <span class="system-name">&lt;<span class="tag-bracket">Kulcare</span>/&gt;</span>
+                <span class="system-domain">Healthcare</span>
+              </div>
+              <p class="system-desc">Enterprise healthcare platform for providers, clinics, and hospitals — patient
+                management, appointments, billing, audit trails, and telehealth — across a Turborepo micro-frontend
+                system spanning 6 independently deployable apps. Built frontend flows for ABDM/ABHA (India's national
+                digital health mission), including HIP linking, ABHA authentication, and consent workflows, and brought
+                core clinical flows to WCAG 2.1 AA.</p>
+              <div class="stack-tags">
+                <span class="stack-tag">React.js</span>
+                <span class="stack-tag">Next.js</span>
+                <span class="stack-tag">TypeScript</span>
+                <span class="stack-tag">Turborepo</span>
+                <span class="stack-tag">ABDM/ABHA</span>
               </div>
             </div>
           </div>
-          <div class="system-content">
-            <div class="system-head">
-              <span class="system-name">&lt;<span class="tag-bracket">Kulcare</span>/&gt;</span>
-              <span class="system-domain">Healthcare</span>
-            </div>
-            <p class="system-desc">Enterprise healthcare platform for providers, clinics, and hospitals — patient management, appointments, billing, audit trails, and telehealth — across a Turborepo micro-frontend system spanning 6 independently deployable apps. Built frontend flows for ABDM/ABHA (India's national digital health mission), including HIP linking, ABHA authentication, and consent workflows, and brought core clinical flows to WCAG 2.1 AA.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">React.js</span>
-              <span class="stack-tag">Next.js</span>
-              <span class="stack-tag">TypeScript</span>
-              <span class="stack-tag">Turborepo</span>
-              <span class="stack-tag">ABDM/ABHA</span>
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div class="system-card reveal">
-        <div class="system-inner">
-          <div class="mockup-panel">
-            <div class="mockup-chrome"><span></span><span></span><span></span></div>
-            <div class="mo-grid">
-              <div class="mo-tile"><div class="thumb"></div><div class="line" style="width:70%"></div></div>
-              <div class="mo-tile"><div class="thumb alt"></div><div class="line" style="width:55%"></div></div>
-              <div class="mo-tile"><div class="thumb"></div><div class="line" style="width:60%"></div></div>
-              <div class="mo-tile"><div class="thumb alt"></div><div class="line" style="width:45%"></div></div>
-              <div class="mo-tile"><div class="thumb alt"></div><div class="line" style="width:65%"></div></div>
-              <div class="mo-tile"><div class="thumb"></div><div class="line" style="width:50%"></div></div>
-              <div class="mo-tile"><div class="thumb"></div><div class="line" style="width:58%"></div></div>
-              <div class="mo-tile"><div class="thumb alt"></div><div class="line" style="width:40%"></div></div>
+        <div class="system-card reveal">
+          <div class="system-inner">
+            <div class="mockup-panel">
+              <div class="mockup-chrome"><span></span><span></span><span></span></div>
+              <div class="mo-grid">
+                <div class="mo-tile">
+                  <div class="thumb"></div>
+                  <div class="line" style="width:70%"></div>
+                </div>
+                <div class="mo-tile">
+                  <div class="thumb alt"></div>
+                  <div class="line" style="width:55%"></div>
+                </div>
+                <div class="mo-tile">
+                  <div class="thumb"></div>
+                  <div class="line" style="width:60%"></div>
+                </div>
+                <div class="mo-tile">
+                  <div class="thumb alt"></div>
+                  <div class="line" style="width:45%"></div>
+                </div>
+                <div class="mo-tile">
+                  <div class="thumb alt"></div>
+                  <div class="line" style="width:65%"></div>
+                </div>
+                <div class="mo-tile">
+                  <div class="thumb"></div>
+                  <div class="line" style="width:50%"></div>
+                </div>
+                <div class="mo-tile">
+                  <div class="thumb"></div>
+                  <div class="line" style="width:58%"></div>
+                </div>
+                <div class="mo-tile">
+                  <div class="thumb alt"></div>
+                  <div class="line" style="width:40%"></div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="system-content">
-            <div class="system-head">
-              <span class="system-name">&lt;<span class="tag-bracket">ONDC</span>Marketplace/&gt;</span>
-              <span class="system-domain">E-Commerce</span>
-            </div>
-            <p class="system-desc">An ONDC-based marketplace platform built on Saleor, supporting buyers, sellers, and platform administrators across 100+ sellers and 5,000+ SKUs. Replaced legacy REST integrations with optimized GraphQL, cutting average data-fetch time by ~40%, and designed configurable workflows that cut content-update turnaround from ~2 days to under 2 hours.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">GraphQL</span>
-              <span class="stack-tag">Saleor</span>
-              <span class="stack-tag">React.js</span>
-              <span class="stack-tag">Frontend Architecture</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="system-card reveal">
-        <div class="system-inner">
-          <div class="mockup-panel">
-            <div class="mockup-chrome"><span></span><span></span><span></span></div>
-            <div class="mz-col">
-              <div class="mz-search"><span class="icon"></span><span class="line"></span></div>
-              <div class="mz-row"><span class="dot2"></span><span class="line" style="width:55%"></span></div>
-              <div class="mz-row"><span class="dot2"></span><span class="line" style="width:35%"></span></div>
-              <div class="mz-row"><span class="dot2"></span><span class="line" style="width:45%"></span></div>
-            </div>
-          </div>
-          <div class="system-content">
-            <div class="system-head">
-              <span class="system-name">&lt;<span class="tag-bracket">Zanran</span>/&gt;</span>
-              <span class="system-domain">Document Intelligence</span>
-            </div>
-            <p class="system-desc">A document-intelligence platform built from the ground up, enabling search, analysis, and extraction across 10,000+ enterprise documents. Designed advanced search and filtering that cut average document-lookup time from ~5 minutes to under 30 seconds for 200+ analysts and auditors.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">PDF Processing</span>
-              <span class="stack-tag">Search Systems</span>
-              <span class="stack-tag">Data Visualization</span>
+            <div class="system-content">
+              <div class="system-head">
+                <span class="system-name">&lt;<span class="tag-bracket">ONDC</span>Marketplace/&gt;</span>
+                <span class="system-domain">E-Commerce</span>
+              </div>
+              <p class="system-desc">An ONDC-based marketplace platform built on Saleor, supporting buyers, sellers, and
+                platform administrators across 100+ sellers and 5,000+ SKUs. Replaced legacy REST integrations with
+                optimized GraphQL, cutting average data-fetch time by ~40%, and designed configurable workflows that cut
+                content-update turnaround from ~2 days to under 2 hours.</p>
+              <div class="stack-tags">
+                <span class="stack-tag">GraphQL</span>
+                <span class="stack-tag">Saleor</span>
+                <span class="stack-tag">React.js</span>
+                <span class="stack-tag">Frontend Architecture</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="section-eyebrow mono">03 — Experience</p>
-        <h2 class="section-title display">Where the work happened.</h2>
-      </div>
-    </div>
-    <div class="timeline">
-
-      <div class="tl-item reveal">
-        <div class="tl-head">
-          <span class="tl-role">Senior Software Engineer</span>
-          <span class="tl-date mono">Jul 2025 — Present</span>
+        <div class="system-card reveal">
+          <div class="system-inner">
+            <div class="mockup-panel">
+              <div class="mockup-chrome"><span></span><span></span><span></span></div>
+              <div class="mz-col">
+                <div class="mz-search"><span class="icon"></span><span class="line"></span></div>
+                <div class="mz-row"><span class="dot2"></span><span class="line" style="width:55%"></span></div>
+                <div class="mz-row"><span class="dot2"></span><span class="line" style="width:35%"></span></div>
+                <div class="mz-row"><span class="dot2"></span><span class="line" style="width:45%"></span></div>
+              </div>
+            </div>
+            <div class="system-content">
+              <div class="system-head">
+                <span class="system-name">&lt;<span class="tag-bracket">Zanran</span>/&gt;</span>
+                <span class="system-domain">Document Intelligence</span>
+              </div>
+              <p class="system-desc">A document-intelligence platform built from the ground up, enabling search,
+                analysis, and extraction across 10,000+ enterprise documents. Designed advanced search and filtering
+                that cut average document-lookup time from ~5 minutes to under 30 seconds for 200+ analysts and
+                auditors.</p>
+              <div class="stack-tags">
+                <span class="stack-tag">PDF Processing</span>
+                <span class="stack-tag">Search Systems</span>
+                <span class="stack-tag">Data Visualization</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="tl-company"><strong>Addval Solutions</strong> · Mohali, India (On-site)</div>
-        <ul class="tl-bullets">
-          <li>Own frontend architecture for Kulcare, a healthcare platform, across a Turborepo micro-frontend system spanning 6 independently deployable applications — leading the shift from a monolithic frontend to unblock independent team releases.</li>
-          <li>Built a shared design system adopted across 8+ modules, cutting new-feature development time by ~30%; closed the type-safety gap by auto-generating API types from the OpenAPI schema.</li>
-          <li>Introduced AI-assisted development practices (Claude Code, AI-based code review) across a 5-engineer team, and diagnosed rendering/load-time bottlenecks that cut page-load time by ~25%.</li>
-        </ul>
-      </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-head">
-          <span class="tl-role">Senior Software Engineer</span>
-          <span class="tl-date mono">Jul 2024 — Jun 2025</span>
-        </div>
-        <div class="tl-company"><strong>Wits Innovation Lab</strong> · Mohali, India (On-site)</div>
-        <ul class="tl-bullets">
-          <li>Built and extended a multi-role ONDC-based e-commerce marketplace (React, Saleor) serving buyer, seller, and admin workflows across 100+ sellers and 5,000+ SKUs.</li>
-          <li>Replaced legacy REST integrations with optimized GraphQL as catalog and order volume grew, cutting average data-fetch time by ~40%.</li>
-          <li>Designed configurable commerce workflows that cut content-update turnaround from ~2 days to under 2 hours, reducing engineering dependency for routine catalog changes.</li>
-        </ul>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-head">
-          <span class="tl-role">Software Developer</span>
-          <span class="tl-date mono">Aug 2021 — Jul 2024</span>
-        </div>
-        <div class="tl-company"><strong>Seasia Infotech</strong> · Mohali, India (On-site)</div>
-        <ul class="tl-bullets">
-          <li>Built Zanran, a document-intelligence platform, from the ground up — search, extraction, visualization, and analytics workflows for 10,000+ enterprise documents.</li>
-          <li>Designed advanced search and filtering that cut average document-lookup time from ~5 minutes to under 30 seconds for 200+ analysts and auditors.</li>
-          <li>Developed interactive PDF data visualization and extraction workflows, translating complex document-processing requirements into an intuitive review experience.</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="section-eyebrow mono">04 — Skills</p>
-        <h2 class="section-title display">The toolkit.</h2>
       </div>
     </div>
-    <div class="skills-grid reveal">
-      <div class="skill-card">
-        <div class="skill-cat-title">Languages &amp; Core</div>
-        <div class="chip-row">
-          <span class="chip">JavaScript (ES2023+)</span>
-          <span class="chip">TypeScript</span>
-          <span class="chip">HTML5</span>
-          <span class="chip">CSS3</span>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow mono">03 — Experience</p>
+          <h2 class="section-title display">Where the work happened.</h2>
         </div>
       </div>
-      <div class="skill-card">
-        <div class="skill-cat-title">Frameworks</div>
-        <div class="chip-row">
-          <span class="chip">React.js</span>
-          <span class="chip">Next.js (App Router)</span>
-          <span class="chip">Micro Frontends</span>
+      <div class="timeline">
+
+        <div class="tl-item reveal">
+          <div class="tl-head">
+            <span class="tl-role">Senior Software Engineer</span>
+            <span class="tl-date mono">Jul 2025 — Present</span>
+          </div>
+          <div class="tl-company"><strong>Addval Solutions</strong> · Mohali, India (On-site)</div>
+          <ul class="tl-bullets">
+            <li>Own frontend architecture for Kulcare, a healthcare platform, across a Turborepo micro-frontend system
+              spanning 6 independently deployable applications — leading the shift from a monolithic frontend to unblock
+              independent team releases.</li>
+            <li>Built a shared design system adopted across 8+ modules, cutting new-feature development time by ~30%;
+              closed the type-safety gap by auto-generating API types from the OpenAPI schema.</li>
+            <li>Introduced AI-assisted development practices (Claude Code, AI-based code review) across a 5-engineer
+              team, and diagnosed rendering/load-time bottlenecks that cut page-load time by ~25%.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-head">
+            <span class="tl-role">Senior Software Engineer</span>
+            <span class="tl-date mono">Jul 2024 — Jun 2025</span>
+          </div>
+          <div class="tl-company"><strong>Wits Innovation Lab</strong> · Mohali, India (On-site)</div>
+          <ul class="tl-bullets">
+            <li>Built and extended a multi-role ONDC-based e-commerce marketplace (React, Saleor) serving buyer, seller,
+              and admin workflows across 100+ sellers and 5,000+ SKUs.</li>
+            <li>Replaced legacy REST integrations with optimized GraphQL as catalog and order volume grew, cutting
+              average data-fetch time by ~40%.</li>
+            <li>Designed configurable commerce workflows that cut content-update turnaround from ~2 days to under 2
+              hours, reducing engineering dependency for routine catalog changes.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-head">
+            <span class="tl-role">Software Developer</span>
+            <span class="tl-date mono">Aug 2021 — Jul 2024</span>
+          </div>
+          <div class="tl-company"><strong>Seasia Infotech</strong> · Mohali, India (On-site)</div>
+          <ul class="tl-bullets">
+            <li>Built Zanran, a document-intelligence platform, from the ground up — search, extraction, visualization,
+              and analytics workflows for 10,000+ enterprise documents.</li>
+            <li>Designed advanced search and filtering that cut average document-lookup time from ~5 minutes to under 30
+              seconds for 200+ analysts and auditors.</li>
+            <li>Developed interactive PDF data visualization and extraction workflows, translating complex
+              document-processing requirements into an intuitive review experience.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow mono">04 — Skills</p>
+          <h2 class="section-title display">The toolkit.</h2>
         </div>
       </div>
-      <div class="skill-card">
-        <div class="skill-cat-title">APIs &amp; Data</div>
-        <div class="chip-row">
-          <span class="chip">GraphQL</span>
-          <span class="chip">REST APIs</span>
-          <span class="chip">State Management</span>
+      <div class="skills-grid reveal">
+        <div class="skill-card">
+          <div class="skill-cat-title">Languages &amp; Core</div>
+          <div class="chip-row">
+            <span class="chip">JavaScript (ES2023+)</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">HTML5</span>
+            <span class="chip">CSS3</span>
+          </div>
         </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat-title">Architecture</div>
-        <div class="chip-row">
-          <span class="chip">Design Systems</span>
-          <span class="chip">Shared UI Libraries</span>
-          <span class="chip">Frontend Architecture</span>
+        <div class="skill-card">
+          <div class="skill-cat-title">Frameworks</div>
+          <div class="chip-row">
+            <span class="chip">React.js</span>
+            <span class="chip">Next.js (App Router)</span>
+            <span class="chip">Micro Frontends</span>
+          </div>
         </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat-title">Performance</div>
-        <div class="chip-row">
-          <span class="chip">Performance Optimization</span>
-          <span class="chip">Responsive Design</span>
-          <span class="chip">Accessibility</span>
+        <div class="skill-card">
+          <div class="skill-cat-title">APIs &amp; Data</div>
+          <div class="chip-row">
+            <span class="chip">GraphQL</span>
+            <span class="chip">REST APIs</span>
+            <span class="chip">State Management</span>
+          </div>
         </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat-title">Practices</div>
-        <div class="chip-row">
-          <span class="chip">Agile Development</span>
-          <span class="chip">Code Review</span>
-          <span class="chip">CI/CD</span>
+        <div class="skill-card">
+          <div class="skill-cat-title">Architecture</div>
+          <div class="chip-row">
+            <span class="chip">Design Systems</span>
+            <span class="chip">Shared UI Libraries</span>
+            <span class="chip">Frontend Architecture</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-cat-title">Performance</div>
+          <div class="chip-row">
+            <span class="chip">Performance Optimization</span>
+            <span class="chip">Responsive Design</span>
+            <span class="chip">Accessibility</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-cat-title">Practices</div>
+          <div class="chip-row">
+            <span class="chip">Agile Development</span>
+            <span class="chip">Code Review</span>
+            <span class="chip">CI/CD</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="education">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="section-eyebrow mono">05 — Education</p>
-        <h2 class="section-title display">Where it started.</h2>
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow mono">05 — Education</p>
+          <h2 class="section-title display">Where it started.</h2>
+        </div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-school">CGC Technical Campus</div>
+          <div class="edu-sub">B.Tech, Computer Science / Faculty of Engineering</div>
+        </div>
+        <span class="edu-year">2021</span>
       </div>
     </div>
-    <div class="edu-card reveal">
-      <div>
-        <div class="edu-school">CGC Technical Campus</div>
-        <div class="edu-sub">B.Tech, Computer Science / Faculty of Engineering</div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p class="contact-eyebrow mono">// get-in-touch.spec</p>
+      <h2 class="contact-title display">Let's build something<br><span class="grad-text">that scales.</span></h2>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=kartiksingla2000@gmail.com" target="_blank" rel="noopener">kartiksingla2000@gmail.com</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/kartik-singla-9b7b60231/" target="_blank"
+          rel="noopener">LinkedIn</a>
+        <a class="btn btn-secondary" href="https://github.com/SinglaKartik" target="_blank" rel="noopener">GitHub</a>
       </div>
-      <span class="edu-year">2021</span>
+      <p class="foot-note">Kartik Singla · Senior Frontend Engineer · Mohali, India</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<footer>
-  <div class="wrap">
-    <p class="contact-eyebrow mono">// get-in-touch.spec</p>
-    <h2 class="contact-title display">Let's build something<br><span class="grad-text">that scales.</span></h2>
-    <div class="contact-links">
-      <a class="btn btn-primary" href="mailto:kartiksingla2000@gmail.com">kartiksingla2000@gmail.com</a>
-      <a class="btn btn-secondary" href="https://www.linkedin.com/in/kartik-singla-9b7b60231/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-secondary" href="https://github.com/SinglaKartik" target="_blank" rel="noopener">GitHub</a>
-    </div>
-    <p class="foot-note">Kartik Singla · Senior Frontend Engineer · Mohali, India</p>
-  </div>
-</footer>
-
-<script>
-  // Purely decorative cursor spotlight — never gates content visibility
-  document.addEventListener('mousemove', (e) => {
-    const el = document.getElementById('spotlight');
-    if (!el) return;
-    const xPct = (e.clientX / window.innerWidth) * 100;
-    const yPct = (e.clientY / window.innerHeight) * 100;
-    el.style.setProperty('--sx', xPct + '%');
-    el.style.setProperty('--sy', yPct + '%');
-  });
-
-  // Light/dark theme toggle
-  const themeToggle = document.getElementById('themeToggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      if (isLight) {
-        document.documentElement.removeAttribute('data-theme');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-      }
-      try {
-        localStorage.setItem('kartik-portfolio-theme', isLight ? 'dark' : 'light');
-      } catch (e) {}
+  <script>
+    // Purely decorative cursor spotlight — never gates content visibility
+    document.addEventListener('mousemove', (e) => {
+      const el = document.getElementById('spotlight');
+      if (!el) return;
+      const xPct = (e.clientX / window.innerWidth) * 100;
+      const yPct = (e.clientY / window.innerHeight) * 100;
+      el.style.setProperty('--sx', xPct + '%');
+      el.style.setProperty('--sy', yPct + '%');
     });
-  }
-</script>
+
+    // Light/dark theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        if (isLight) {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+        try {
+          localStorage.setItem('kartik-portfolio-theme', isLight ? 'dark' : 'light');
+        } catch (e) { }
+      });
+    }
+  </script>
 
 </body>
+
 </html>
